@@ -17,22 +17,18 @@ class manageLS {
 
 	toggleSafety() {
 		this._safemode = !this._safemode;
+		console.log('TCL: manageLS -> toggleSafety -> this._safemode', this._safemode);
 	}
 
 	valueExists(key) {
-		console.log(this._ls.hasOwnProperty(key));
-		if (this._ls.hasOwnProperty(key)) {
-			throw new Error(`arg ${key} is already defined`);
+		if (this._safemode && this._ls.hasOwnProperty(key)) {
+			throw new Error(`safe mode is on: cannot override ${key}`);
 		}
 	}
 
 	setItem(key, value) {
 		if (arguments.length != 2) throw new Error(`missing arg:key: ${key},value: ${value}`);
 		this.valueExists(key);
-
-		if (this._safemode && this.valueExists(key)) {
-			throw new Error(`safe mode is on: cannot override ${key}`);
-		}
 		this._ls[key] = value;
 	}
 
