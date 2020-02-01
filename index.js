@@ -16,7 +16,6 @@ class manageLS {
 	}
 
 	toggleSafety() {
-		if (typeof bool != 'boolean') throw new Error(`arg ${bool} is not a boolean`);
 		this._safemode = !this._safemode;
 	}
 
